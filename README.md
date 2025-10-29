@@ -119,7 +119,7 @@ Aplicar conceitos de **engenharia, lógica sequencial e segurança viária**.
    - Modificações futuras
 
 <p align="center">
-  <img src="./sema3.png" width="400" alt="Conexões com Arduino">
+  <img src="./sema2.png" width="400" alt="Conexões com Arduino">
 </p>
 
 ---
@@ -133,7 +133,7 @@ Aplicar conceitos de **engenharia, lógica sequencial e segurança viária**.
    Pequenos ajustes foram realizados até que o ciclo completo do semáforo funcionasse de maneira estável e repetitiva.
 
 <p align="center">
-  <img src="./sema4.png" width="400" alt="Testes e ajustes finais">
+  <img src="./sema3.png" width="400" alt="Testes e ajustes finais">
 </p>
 
 

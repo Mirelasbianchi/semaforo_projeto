@@ -76,7 +76,7 @@ Aplicar conceitos de **engenharia, lógica sequencial e segurança viária**.
    No circuito, o **ânodo** é conectado ao pino digital do Arduino responsável pelo controle, enquanto o **cátodo** é conectado ao GND por meio de um resistor. Essa ligação garante o sentido correto da corrente, evitando inversão de polaridade.
 
 <p align="center">
-  <img src="./sema.png" width="400" alt="LEDs posicionados na protoboard">
+  <img src="./sema.jpg" width="400" alt="LEDs posicionados na protoboard">
 </p>
 
 ---
@@ -98,7 +98,7 @@ Aplicar conceitos de **engenharia, lógica sequencial e segurança viária**.
    Logo, ao definir R = 220 Ω, garantimos que a corrente permaneça em um nível seguro para o funcionamento contínuo dos LEDs.
 
 <p align="center">
-  <img src="./sema1.png" width="400" alt="Conexões com resistores">
+  <img src="./sema1.jpg" width="400" alt="Conexões com resistores">
 </p>
 
 ---
@@ -119,7 +119,7 @@ Aplicar conceitos de **engenharia, lógica sequencial e segurança viária**.
    - Modificações futuras
 
 <p align="center">
-  <img src="./sema2.png" width="400" alt="Conexões com Arduino">
+  <img src="./sema2.jpg" width="400" alt="Conexões com Arduino">
 </p>
 
 ---
@@ -133,7 +133,7 @@ Aplicar conceitos de **engenharia, lógica sequencial e segurança viária**.
    Pequenos ajustes foram realizados até que o ciclo completo do semáforo funcionasse de maneira estável e repetitiva.
 
 <p align="center">
-  <img src="./sema3.png" width="400" alt="Testes e ajustes finais">
+  <img src="./sema3.jpg" width="400" alt="Testes e ajustes finais">
 </p>
 
 

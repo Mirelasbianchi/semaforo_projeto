@@ -12,7 +12,6 @@
   - [Código](#código)
   - [Funcionamento e Testes](#funcionamento-e-testes)
   - [Vídeo de Demonstração](#vídeo-de-demonstração)
-- [Especificações Elétricas](#especificações-elétricas)
 - [Parte 3: Avaliação de Pares](#parte-3-avaliação-de-pares)
 - [Aprendizados e Conclusões](#aprendizados-e-conclusões)
 - [Possíveis Extensões Futuras](#possíveis-extensões-futuras)
@@ -52,7 +51,7 @@ Aplicar conceitos de **engenharia, lógica sequencial e segurança viária**.
 | LED Verde | 1 | Indica "Siga" |
 | Resistores | 3 | 220 Ω (proteção dos LEDs) |
 | Protoboard | 1 | Montagem do circuito |
-| Jumpers | 8 | Conexões entre pinos e LEDs |
+| Jumpers | 5 | Conexões entre pinos e LEDs |
 | Cabo USB | 1 | Alimentação e upload do código |
 
 ---
@@ -61,45 +60,80 @@ Aplicar conceitos de **engenharia, lógica sequencial e segurança viária**.
 
 | LED | Pino Digital Arduino | Resistor | Conexão ao GND |
 |------|----------------------|-----------|----------------|
-| Vermelho | 13 | 220 Ω | Sim |
-| Amarelo | 12 | 220 Ω | Sim |
-| Verde | 11 | 220 Ω | Sim |
+| Vermelho | 8 | 330 Ω | Sim |
+| Amarelo | 9 | 330 Ω | Sim |
+| Verde | 10 | 330 Ω | Sim |
 
-### Tutorial de Montagem
+### Tutorial de Montagem 
 
-1. **Posicionamento dos LEDs na protoboard**  
-   Os LEDs foram posicionados verticalmente na protoboard seguindo a ordem tradicional do semáforo: vermelho no topo, amarelo no meio e verde na parte inferior. Esta disposição facilita a visualização e organização das conexões.  
+1. **Posicionamento dos LEDs na Protoboard**  
+   Os LEDs foram posicionados verticalmente na protoboard seguindo a ordem tradicional empregada em sistemas semafóricos: vermelho na parte superior, amarelo ao centro e verde na parte inferior.  
+
+   Cada LED possui duas pernas (terminais):  
+   - **Ânodo (terminal positivo)** → normalmente a perna **mais longa**;  
+   - **Cátodo (terminal negativo)** → perna **mais curta**, geralmente próxima ao chanfro ou parte plana da cápsula.  
+
+   No circuito, o **ânodo** é conectado ao pino digital do Arduino responsável pelo controle, enquanto o **cátodo** é conectado ao GND por meio de um resistor. Essa ligação garante o sentido correto da corrente, evitando inversão de polaridade.
 
 <p align="center">
-  <img src="./imagens/tutorial_montagem_1.jpg" width="400" alt="LEDs posicionados na protoboard">
+  <img src="./sema.png" width="400" alt="LEDs posicionados na protoboard">
 </p>
 
-2. **Conexão dos resistores**  
-   Cada LED foi conectado em série com um resistor de 220 Ω para limitar a corrente e proteger os componentes. Os resistores foram posicionados próximos aos LEDs para reduzir o comprimento dos fios e evitar confusão na protoboard.  
+---
+
+2. **Conexão dos Resistores (Proteção de Corrente)**  
+   Cada LED foi conectado em **série** com um resistor de **220 Ω**.  
+
+   A função do resistor é **limitar a corrente elétrica** que atravessa o LED, evitando que ele receba valores superiores ao recomendado (aproximadamente 20 mA). Sem essa proteção, o LED poderia sofrer **sobrecorrente**, ocasionando superaquecimento e queima do componente.
+
+   Esta relação é explicada pela **Lei de Ohm**:
+
+   V = R.I
+
+   Onde:
+   - *V* é a tensão aplicada,
+   - *R* é a resistência,
+   - *I* é a corrente resultante.
+
+   Logo, ao definir R = 220 Ω, garantimos que a corrente permaneça em um nível seguro para o funcionamento contínuo dos LEDs.
 
 <p align="center">
-  <img src="./imagens/tutorial_montagem_2.jpg" width="400" alt="Conexões com resistores">
+  <img src="./sema1.png" width="400" alt="Conexões com resistores">
 </p>
 
-3. **Ligação ao Arduino**  
-   Cada LED foi conectado a um pino digital do Arduino (vermelho: pino 13, amarelo: pino 12, verde: pino 11) e ao GND através do resistor. Essa configuração permite controlar individualmente cada LED via programação.  
+---
+
+3. **Ligação ao Arduino e Organização dos Jumpers**
+
+| LED | Pino Digital do Arduino (Ânodo) | Cátodo → Resistor → GND |
+|-----|--------------------------------|--------------------------|
+| Vermelho | **8** | Sim |
+| Amarelo  | **9** | Sim |
+| Verde    | **10** | Sim |
+
+   Quando o Arduino envia um sinal **HIGH (5V)** para o pino, o LED acende; quando envia **LOW (0V)**, o LED apaga. Isso permite a criação da sequência lógica do semáforo via programação.
+
+   Os jumpers foram organizados de maneira paralela e limpa, evitando cruzamento excessivo de fios, o que facilita:
+   - Visualização do circuito
+   - Identificação de falhas
+   - Modificações futuras
 
 <p align="center">
-  <img src="./imagens/tutorial_montagem_3.jpg" width="400" alt="Conexões com Arduino">
+  <img src="./sema3.png" width="400" alt="Conexões com Arduino">
 </p>
 
-4. **Organização dos jumpers**  
-   Os fios de conexão (jumpers) foram dispostos de forma a manter a protoboard organizada, evitando sobreposição e facilitando futuras alterações no circuito.  
+---
+
+4. **Testes e Ajustes Finais**  
+   Após a montagem, cada LED foi testado individualmente através de comandos simples no código (`digitalWrite(pin, HIGH/LOW)`), verificando:
+   - Correta polaridade dos LEDs (ânodo e cátodo)
+   - Contatos firmes na protoboard
+   - Continuidade entre resistor e terra
+
+   Pequenos ajustes foram realizados até que o ciclo completo do semáforo funcionasse de maneira estável e repetitiva.
 
 <p align="center">
-  <img src="./imagens/tutorial_montagem_4.jpg" width="400" alt="Organização dos jumpers">
-</p>
-
-5. **Testes e ajustes finais**  
-   Após a montagem, foram realizados testes para garantir que cada LED acendesse corretamente conforme o código. Pequenos ajustes nas conexões foram necessários para corrigir contatos soltos e otimizar o fluxo do circuito.  
-
-<p align="center">
-  <img src="./imagens/tutorial_montagem_5.jpg" width="400" alt="Testes e ajustes finais">
+  <img src="./sema4.png" width="400" alt="Testes e ajustes finais">
 </p>
 
 
@@ -114,36 +148,28 @@ Cor /	Duração	/ Significado
 
 ### Código 
 ```
-// Projeto: Semáforo - Departamento de Engenharia de Trânsito
-// Autor: [Seu Nome]
-// Data: [dd/mm/aaaa]
-
-int ledVermelho = 13;
-int ledAmarelo = 12;
-int ledVerde = 11;
-
-void setup() {
-  pinMode(ledVermelho, OUTPUT);
-  pinMode(ledAmarelo, OUTPUT);
-  pinMode(ledVerde, OUTPUT);
+void setup()
+{
+  pinMode(8, OUTPUT); //vermelho
+  pinMode(9, OUTPUT); //amarelo
+  pinMode(10, OUTPUT); //verde
 }
 
-void loop() {
-  // Fase Vermelha
-  digitalWrite(ledVermelho, HIGH);
+void loop()
+{
+  digitalWrite(8, HIGH); //acende o vermelho
   delay(6000);
-  digitalWrite(ledVermelho, LOW);
+  digitalWrite(8, LOW);
 
-  // Fase Verde
-  digitalWrite(ledVerde, HIGH);
+  digitalWrite(10, HIGH); //acende o verde
   delay(4000);
-  digitalWrite(ledVerde, LOW);
+  digitalWrite(10, LOW);
 
-  // Fase Amarela
-  digitalWrite(ledAmarelo, HIGH);
+  digitalWrite(9, HIGH); //acende o amarelo
   delay(2000);
-  digitalWrite(ledAmarelo, LOW);
+  digitalWrite(9, LOW);
 }
+
 ```
 ## Funcionamento e Testes
 
@@ -154,22 +180,8 @@ Durante os testes:
 Este ciclo se repete continuamente, simulando o funcionamento de um semáforo urbano em condições normais de tráfego.
 
  ## Vídeo de Demonstração:
- Clique aqui para assistir ao vídeo no YouTube
- (insira o link do seu vídeo)
+[Clique aqui para assistir](https://drive.google.com/file/d/1wIwsxWDxblmjbJlVcYHwEUNKgwmkOpX3/view?usp=sharing)
 
- Figura 2 — Semáforo em funcionamento
-<p align="center">
-  <img src="./imagens/semaforo_funcionando.gif" width="500" alt="Funcionamento do Semáforo">
-</p>
-
-
-## Especificações Elétricas
-- Componente	Tensão (V)	Corrente (mA)	Observação
-- LED Vermelho	2.0	20	Alta visibilidade
-- LED Amarelo	2.1	20	Transição segura
-- LED Verde	2.2	20	Baixo consumo
-- Resistor	-	-	220 Ω de limitação de corrente
-- Arduino Uno	5V	-	Alimentação USB ou externa
 
 ## Parte 3: Avaliação de Pares
 

@@ -187,8 +187,8 @@ Este ciclo se repete continuamente, simulando o funcionamento de um semáforo ur
 
 | Avaliador(a) | Comentário / Nota |
 |--------------|------------------|
-| Nome 1       | [Comentário aqui] / [0–10] |
-| Nome 2       | [Comentário aqui] / [0–10] |
+| Letícia Saravia       | "Ficou muito compelto e você claramente se esforçou para deixar tudo muito detalhado e toda a montagem ficou bem clara." / 10 |
+| Karol Barbosa       | "A documentação está muito clara e objetiva, o circuito funciona perfeitamente, e ela aparece no vídeo demonstrando que é a autora do projeto - foi muito além." / 10 |
 
 Critérios de avaliação:
 - Clareza da montagem física

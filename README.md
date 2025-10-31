@@ -137,6 +137,13 @@ Aplicar conceitos de **engenharia, lógica sequencial e segurança viária**.
 </p>
 
 
+5. **Semáforo Final**
+
+<p align="center">
+  <img src="./luz.jpg" width="400" alt="Testes e ajustes finais">
+</p>
+
+
 ## Parte 2: Programação e Lógica
 
 O comportamento do semáforo segue a seguinte sequência temporal:
@@ -148,27 +155,81 @@ Cor /	Duração	/ Significado
 
 ### Código 
 ```
-void setup()
-{
-  pinMode(8, OUTPUT); //vermelho
-  pinMode(9, OUTPUT); //amarelo
-  pinMode(10, OUTPUT); //verde
+//classe semaforo
+class Semaforo {
+private:
+  const int* _pinos[3]; 
+  
+  const long* _tempoVermelho;
+  const long* _tempoAmarelo;
+  const long* _tempoVerde;
+
+  void setLuz(int indiceLuz, bool estado) {
+    digitalWrite(*_pinos[indiceLuz], estado ? HIGH : LOW);
+  }
+
+public:
+  Semaforo(const int* pV, const int* pA, const int* pG, 
+           const long* tV, const long* tA, const long* tG)
+    : _pinos{pV, pA, pG}, 
+      _tempoVermelho(tV), 
+      _tempoAmarelo(tA), 
+      _tempoVerde(tG)
+  {
+    // Configura os pinos como saída
+    for (int i = 0; i < 3; i++) {
+      pinMode(*_pinos[i], OUTPUT);
+    }
+  }
+
+  void run() {
+    // Vermelho
+    setLuz(0, HIGH);
+    setLuz(1, LOW);
+    setLuz(2, LOW);
+    delay(*_tempoVermelho);
+
+    // Verde
+    setLuz(0, LOW);
+    setLuz(1, LOW);
+    setLuz(2, HIGH);
+    delay(*_tempoVerde);
+
+    // Amarelo
+    setLuz(0, LOW);
+    setLuz(1, HIGH);
+    setLuz(2, LOW);
+    delay(*_tempoAmarelo);
+  }
+};
+
+const int PINO_VERMELHO = 8;
+const int PINO_AMARELO = 9;
+const int PINO_VERDE = 10;
+
+const long TEMPO_VERMELHO = 6000;
+const long TEMPO_AMARELO = 2000;
+const long TEMPO_VERDE = 4000;
+
+// Objeto usando ponteiros
+Semaforo meuSemaforo(
+  &PINO_VERMELHO, 
+  &PINO_AMARELO, 
+  &PINO_VERDE,
+  &TEMPO_VERMELHO, 
+  &TEMPO_AMARELO, 
+  &TEMPO_VERDE
+);
+
+void setup() {
+  Serial.begin(115200); 
+  Serial.println("Semáforo iniciado!");
 }
 
-void loop()
-{
-  digitalWrite(8, HIGH); //acende o vermelho
-  delay(6000);
-  digitalWrite(8, LOW);
-
-  digitalWrite(10, HIGH); //acende o verde
-  delay(4000);
-  digitalWrite(10, LOW);
-
-  digitalWrite(9, HIGH); //acende o amarelo
-  delay(2000);
-  digitalWrite(9, LOW);
+void loop() {
+  meuSemaforo.run();
 }
+
 
 ```
 ## Funcionamento e Testes
@@ -180,7 +241,7 @@ Durante os testes:
 Este ciclo se repete continuamente, simulando o funcionamento de um semáforo urbano em condições normais de tráfego.
 
  ## Vídeo de Demonstração:
-[Clique aqui para assistir](https://drive.google.com/file/d/1wIwsxWDxblmjbJlVcYHwEUNKgwmkOpX3/view?usp=sharing)
+[Clique aqui para assistir](https://drive.google.com/file/d/1XBrTzAYDokj0NS6a-J7hoX8oh5zeVNuE/view?usp=sharing)
 
 
 ## Parte 3: Avaliação de Pares
